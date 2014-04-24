@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		"bj/tw2parser"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"doNotSave": [
+	],
+	"includeWikis": [
+	]
+}
