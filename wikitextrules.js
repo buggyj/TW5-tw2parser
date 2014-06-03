@@ -534,8 +534,7 @@ var rules = [
 		});
 	} else {
 		w.output.push({
-			type: "element",
-			tag: "$link",
+			type: "link",
 			attributes: {
 				to: {type: "string", value: link}
 			},
@@ -569,8 +568,7 @@ var rules = [
 		}
 		if(w.autoLinkWikiWords) {
 			w.output.push({
-				type: "element",
-				tag: "$link",
+				type: "link",
 				attributes: {
 					to: {type: "string", value: w.matchText}
 				},
