@@ -12,10 +12,9 @@ module-type: module
 Information about this module:
 rename macros and
 re-jig macro params from tw2 to tw5 style
-new macros created as a result of adapting tw2 should be prepended "mangled",
-and defined in macrodef.tid 
+new macros created as a result of adapting tw2 should be 
+prepended "__system" to distinguish them from the actual used name
 */
-
 var sliceSeparator = "::";
 var sectionSeparator = "##";
 
@@ -36,7 +35,7 @@ function getslicename(title) {
 		return title.substr(pos + sliceSeparator.length);
 	}
 	return "";
-}
+};
 function gettiddlername(title) {
 	if(!title)
 		return "";
@@ -75,23 +74,20 @@ var tabshandler = function(paramstring) {
 	var cookie = params[0].value;
 	var numTabs = (params.length-1)/3;
 	var t;
-	var labeltid = cookie+"/label";
-	var prompttid = cookie+"/prompt";
-	var tabscontent = "";
+	var tabslist = "";
 	var labelarray = {};
     var promptarray = {};
 	for(t=0; t<numTabs; t++) {
-		var content = params[t*3+3].value;
-		tabscontent = tabscontent+" " + content;
-		labelarray[content] = params[t*3+1].value;
-		promptarray[content] = params[t*3+2].value;
+		var contentName = params[t*3+3].value;
+		tabslist = tabslist+" " + contentName;
+		labelarray[contentName] = params[t*3+1].value;
+		promptarray[contentName] = params[t*3+2].value;
 	} 
-	//create a json files containing labels and prompts that will be retrieved later
-	$tw.wiki.addTiddler(new $tw.Tiddler({title: labeltid, type: "application/json", text: JSON.stringify(labelarray)}));
-	$tw.wiki.addTiddler(new $tw.Tiddler({title: prompttid, type: "application/json", text: JSON.stringify(promptarray)}));
-	return '"'+tabscontent +'" "'+cookie+'"';
+	//Create a list of names (tiddlers, tiddler/sections, tiddler/slices), and create maps from name -> label and name -> prompt
+	//Use json to implement maps 
+	return "'"+tabslist +"' '"+JSON.stringify(promptarray)+"' '"+JSON.stringify(labelarray)+"' '"+cookie+"'";
 };
-var namedapter = {tabs:'mangled_tabs'};
+var namedapter = {tabs:'__system_tabs'};
 var paramadapter = {
 	tabs: tabshandler
 }
