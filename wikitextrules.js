@@ -496,7 +496,6 @@ var rules = [
 					name=macroadapter.namedapter[name];
 				}
 				w.nextMatch = this.lookaheadRegExp.lastIndex;
-				//alert(name+" "+params +" "+nameold+" "+ lookaheadMatch[3]);
 				insertMacroCall(w,w.output,name,params);
 			}
 		}
