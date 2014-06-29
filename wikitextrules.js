@@ -491,6 +491,7 @@ var rules = [
 			if (name) {
 				if (!!macroadapter.paramadapter[name]) {
 					params=macroadapter.paramadapter[name](params);
+					//alert("going out as "+params);
 				}
 				if (!!macroadapter.namedapter[name]) {
 					name=macroadapter.namedapter[name];

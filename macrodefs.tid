@@ -12,21 +12,21 @@ title: $:/plugins/tiddlywiki/tw2parser/macrodefs
 \end
 
 \define __system_tabinstance(state, currentTab, prompts, labels)
-		<span title=<<entryof "$currentTab$" """$prompts$""">> ><$button set=<<qualify "$state$">> setTo="$currentTab$" selectedClass="tw-tab-selected">
+		<span title=<<entryof "$currentTab$" """$prompts$""">> ><$button set="$state$" setTo="$currentTab$" selectedClass="tw-tab-selected">
 		<<entryof "$currentTab$" """$labels$""" >>
 		</$button></span>
 \end
 
-\define __system_tabs(tabsList,prompts,labels,state:"$:/state/tab")
+\define __system_tabs(params)
 <div class="tw-tab-buttons">
-	<$list filter="$tabsList$" variable="currentTab">
-		<$macrocall $name="__system_tabinstance" state="$state$" prompts="""$prompts$""" labels="""$labels$""" currentTab=<<currentTab>>/>
+	<$list filter=<<getkeyslist """$params$""">> variable="currentTab">
+		<$macrocall $name="__system_tabinstance" state=<<getcookie """$params$""">> prompts=<<getprompts """$params$""">> labels=<<getlabels """$params$""">> currentTab=<<currentTab>>/>
 	</$list>
 </div>
 <div class="tw-tab-divider"/>
 <div class="tw-tab-content">
-	<$list filter="$tabsList$" variable="currentTab">
-		<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
+	<$list filter=<<getkeyslist """$params$""">> variable="currentTab">
+			<$reveal type="match" state=<<getcookie """$params$""">> text=<<currentTab>> default="$default$">
 			<$classictransclude tiddler=<<currentTab>> />
 		</$reveal>
 	</$list>

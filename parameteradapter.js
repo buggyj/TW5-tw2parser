@@ -71,7 +71,7 @@ var parserparams = function(paramString) {
 }
 var tabshandler = function(paramstring) {
 	var params = parserparams(paramstring);
-	var cookie = params[0].value;
+	var cookie = params[0].value;	return '"""'+JSON.stringify(params)+'"""';
 	var numTabs = (params.length-1)/3;
 	var t;
 	var tabslist = "";
@@ -85,7 +85,7 @@ var tabshandler = function(paramstring) {
 	} 
 	//Create a list of names (tiddlers, tiddler/sections, tiddler/slices), and create maps from name -> label and name -> prompt
 	//Use json to implement maps 
-	return '"""'+tabslist +'""" """'+JSON.stringify(promptarray)+'""" """'+JSON.stringify(labelarray)+'""" """'+cookie+'"""';
+	return '"""'+JSON.stringify(params)+'"""';
 };
 var namedapter = {tabs:'__system_tabs'};
 var paramadapter = {
